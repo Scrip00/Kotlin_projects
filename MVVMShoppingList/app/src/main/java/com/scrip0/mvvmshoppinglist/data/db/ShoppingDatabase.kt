@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.scrip0.mvvmshoppinglist.data.ShoppingItem
+import com.scrip0.mvvmshoppinglist.data.db.entities.ShoppingItem
 
 @Database(
     entities = [ShoppingItem::class],
