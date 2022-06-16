@@ -8,10 +8,10 @@ import com.scrip0.mvvmshoppinglist.data.db.entities.ShoppingItem
 interface ShoppingDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(item: ShoppingItem)
+    fun upsert(item: ShoppingItem)
 
     @Delete
-    suspend fun delete(item: ShoppingItem)
+    fun delete(item: ShoppingItem)
 
     @Query("SELECT * FROM shopping_items")
     fun getAllShoppingItems(): LiveData<List<ShoppingItem>>
