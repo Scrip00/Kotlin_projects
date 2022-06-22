@@ -16,9 +16,22 @@ class MainActivity : AppCompatActivity() {
 		setContentView(R.layout.activity_main)
 
 		GlobalScope.launch {
-			delay(3000L)
+			val networkCallAnswer = doNetworkCall()
+			val networkCallAnswer2 = doNetworkCall2()
+			Log.d(TAG, networkCallAnswer)
+			Log.d(TAG, networkCallAnswer2)
 			Log.d(TAG, "Coroutine says hello from thread ${Thread.currentThread().name}")
 		}
 		Log.d(TAG, "Hello from thread here ${Thread.currentThread().name}")
+	}
+
+	private suspend fun doNetworkCall(): String {
+		delay(3000L)
+		return "This is custom suspend f-n"
+	}
+
+	private suspend fun doNetworkCall2(): String {
+		delay(3000L)
+		return "This is custom suspend f-n"
 	}
 }
