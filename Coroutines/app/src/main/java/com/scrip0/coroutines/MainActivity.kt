@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import kotlin.system.measureNanoTime
+import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +17,19 @@ class MainActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		calcFib()
+		doAsync()
+	}
+
+	private fun doAsync() {
+		GlobalScope.launch(Dispatchers.IO) {
+			val time = measureTimeMillis {
+				val call1 = async { doNetworkCall() }
+				val call2 = async { doNetworkCall() }
+				Log.d(TAG, "Call 1 is ${call1.await()}")
+				Log.d(TAG, "Call 2 is ${call2.await()}")
+			}
+			Log.d(TAG, "It took $time sec to complete")
+		}
 	}
 
 	@SuppressLint("SetTextI18n")
@@ -88,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private suspend fun doNetworkCall(): String {
-		delay(1000L)
+		delay(3000L)
 		return "This is a fake network call"
 	}
 }
