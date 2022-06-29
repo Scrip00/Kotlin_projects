@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "205116413895",
+    "project_id": "fir-login-f29a4",
+    "storage_bucket": "fir-login-f29a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205116413895:android:99272dcfbb6b461738abe2",
+        "android_client_info": {
+          "package_name": "com.scrip0.firebasefirestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205116413895-ioe1ivt4s0bof3bdrrqf4gq640mpt6fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP-Czh3kg-YuljiU-Bl5OTEx00Ll1ee14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205116413895-ioe1ivt4s0bof3bdrrqf4gq640mpt6fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205116413895:android:f60b66e092f5b9e238abe2",
+        "android_client_info": {
+          "package_name": "com.scrip0.firebaselogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205116413895-6k1q2kqamnqe55nambbo68m8rpfbhjbt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.scrip0.firebaselogin",
+            "certificate_hash": "fb7c721bd24326d1bed5e3eb85b1477438435431"
+          }
+        },
+        {
+          "client_id": "205116413895-ioe1ivt4s0bof3bdrrqf4gq640mpt6fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP-Czh3kg-YuljiU-Bl5OTEx00Ll1ee14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205116413895-ioe1ivt4s0bof3bdrrqf4gq640mpt6fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
