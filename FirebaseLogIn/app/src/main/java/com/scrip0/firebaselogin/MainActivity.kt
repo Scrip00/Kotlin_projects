@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -21,11 +20,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
-const val REQUEST_CODE_SIGN_IN = 0
-
 class MainActivity : AppCompatActivity() {
 
-	lateinit var auth: FirebaseAuth
+	private lateinit var auth: FirebaseAuth
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -47,6 +44,10 @@ class MainActivity : AppCompatActivity() {
 		btnLogout.setOnClickListener {
 			auth.signOut()
 			checkLoggedInState()
+		}
+
+		ivProfilePicture.setOnClickListener {
+			getImgFromGallery.launch("image/*")
 		}
 
 		btnSignInGoogle.setOnClickListener {
@@ -88,17 +89,23 @@ class MainActivity : AppCompatActivity() {
 		registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 			if (it.resultCode == Activity.RESULT_OK) {
 				val account = GoogleSignIn.getSignedInAccountFromIntent(it.data).result
-				account?.let {
-					googleAuthForFirebase(it)
+				account?.let { signInAccount ->
+					googleAuthForFirebase(signInAccount)
 				}
 			}
 		}
 
-	private fun updateProfile() {
+	private val getImgFromGallery =
+		registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+			uri?.let {
+				updateProfile(uri)
+			}
+		}
+
+	private fun updateProfile(uri: Uri? = null) {
 		auth.currentUser?.let { user ->
 			val username = etUsername.text.toString()
-			val photoURI =
-				Uri.parse("android.resource://$packageName/${R.drawable.logo_black_square}")
+			val photoURI = uri ?: user.photoUrl
 			val profileUpdates = UserProfileChangeRequest.Builder()
 				.setDisplayName(username)
 				.setPhotoUri(photoURI)
@@ -178,7 +185,6 @@ class MainActivity : AppCompatActivity() {
 			tvLoggedIn.text = "You are logged in"
 			etUsername.setText(user.displayName)
 			ivProfilePicture.setImageURI(user.photoUrl)
-			Log.d("LOLPP", user.photoUrl.toString())
 		}
 	}
 }
