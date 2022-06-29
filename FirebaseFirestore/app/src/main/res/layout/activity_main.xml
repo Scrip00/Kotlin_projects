@@ -83,6 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textSize="12sp"
         android:text="Save to database"
         app:layout_constraintEnd_toStartOf="@+id/btnUpdatePerson"
         app:layout_constraintHorizontal_bias="0.5"
