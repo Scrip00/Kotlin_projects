@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity() {
 		btnUpdatePerson.setOnClickListener {
 			updatePerson(getOldPerson(), getNewPersonMap())
 		}
+
+		btnBatchedWrite.setOnClickListener {
+			changeName("4WuOxjkcVPe1SjjqwLEL", "Scrip0", "LOL")
+		}
 	}
 
 	private fun getOldPerson(): Person {
@@ -127,6 +131,24 @@ class MainActivity : AppCompatActivity() {
 				}
 			}
 		}
+
+	private fun changeName(
+		personId: String,
+		newFirstName: String,
+		newLastName: String,
+	) = CoroutineScope(Dispatchers.IO).launch {
+		try {
+			Firebase.firestore.runBatch { batch ->
+				val personRef = personCollectionRef.document(personId)
+				batch.update(personRef, "firstName", newFirstName)
+				batch.update(personRef, "lastName", newLastName)
+			}.await()
+		} catch (e: Exception) {
+			withContext(Dispatchers.Main) {
+				Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_LONG).show()
+			}
+		}
+	}
 
 	private fun subscribeToReaTimeUpdates() {
 		personCollectionRef.addSnapshotListener { value, error ->
