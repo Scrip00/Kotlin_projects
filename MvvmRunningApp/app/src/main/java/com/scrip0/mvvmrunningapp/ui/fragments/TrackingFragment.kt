@@ -1,11 +1,14 @@
 package com.scrip0.mvvmrunningapp.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.GoogleMap
 import com.scrip0.mvvmrunningapp.R
+import com.scrip0.mvvmrunningapp.other.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.scrip0.mvvmrunningapp.services.TrackingService
 import com.scrip0.mvvmrunningapp.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tracking.*
@@ -20,11 +23,19 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		mapView.onCreate(savedInstanceState)
-
+		btnToggleRun.setOnClickListener {
+			sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+		}
 		mapView.getMapAsync {
 			map = it
 		}
 	}
+
+	private fun sendCommandToService(action: String) =
+		Intent(requireContext(), TrackingService::class.java).also {
+			it.action = action
+			requireContext().startService(it)
+		}
 
 	override fun onResume() {
 		super.onResume()
