@@ -1,8 +1,8 @@
-package com.scrip0.mvvmrunningapp
+package com.scrip0.mvvmrunningapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.scrip0.mvvmrunningapp.R
 import com.scrip0.mvvmrunningapp.db.RunDAO
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -17,6 +17,5 @@ class MainActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		Log.d("runDao", "RUNDAO: ${runDAO.hashCode()}")
 	}
 }
