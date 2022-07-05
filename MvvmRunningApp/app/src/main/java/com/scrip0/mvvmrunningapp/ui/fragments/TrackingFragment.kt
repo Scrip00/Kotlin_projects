@@ -249,6 +249,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 	override fun onResume() {
 		super.onResume()
 		mapView?.onResume()
+		mapView.getMapAsync {
+			map = it
+			map?.clear()
+			addAllPolylines()
+			moveCameraToUser()
+		}
 	}
 
 	override fun onStart() {
