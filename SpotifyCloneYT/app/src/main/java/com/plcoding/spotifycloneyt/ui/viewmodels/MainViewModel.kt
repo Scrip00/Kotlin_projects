@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(
 
     val isConnected = musicServiceConnection.isConnected
     val networkError = musicServiceConnection.networkError
-    val curPlayingCong = musicServiceConnection.curPlayingSong
+    val curPlayingSong = musicServiceConnection.curPlayingSong
     val playbackState = musicServiceConnection.playbackState
 
     init {
@@ -67,7 +67,7 @@ class MainViewModel @Inject constructor(
     fun playOrToggleSong(mediaItem: Song, toggle: Boolean = false) {
         val isPrepared = playbackState.value?.isPrepared ?: true
         Log.d("LOL", isPrepared.toString())
-        if (isPrepared && mediaItem.mediaId == curPlayingCong.value?.getString(METADATA_KEY_MEDIA_ID)) {
+        if (isPrepared && mediaItem.mediaId == curPlayingSong.value?.getString(METADATA_KEY_MEDIA_ID)) {
             playbackState.value?.let { playbackState ->
                 when {
                     playbackState.isPlaying -> if (toggle) musicServiceConnection.transportControls.pause()
