@@ -2,6 +2,7 @@ package com.plcoding.spotifycloneyt.ui.viewmodels
 
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat.METADATA_KEY_MEDIA_ID
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,8 +13,10 @@ import com.plcoding.spotifycloneyt.exoplayer.isPlaying
 import com.plcoding.spotifycloneyt.exoplayer.isPrepared
 import com.plcoding.spotifycloneyt.other.Constants.MEDIA_ROOT_ID
 import com.plcoding.spotifycloneyt.other.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(
     private val musicServiceConnection: MusicServiceConnection
 ) : ViewModel() {
@@ -61,8 +64,9 @@ class MainViewModel @Inject constructor(
         musicServiceConnection.transportControls.seekTo(pos)
     }
 
-    fun playOrToggleSing(mediaItem: Song, toggle: Boolean = false) {
-        val isPrepared = playbackState.value?.isPrepared ?: false
+    fun playOrToggleSong(mediaItem: Song, toggle: Boolean = false) {
+        val isPrepared = playbackState.value?.isPrepared ?: true
+        Log.d("LOL", isPrepared.toString())
         if (isPrepared && mediaItem.mediaId == curPlayingCong.value?.getString(METADATA_KEY_MEDIA_ID)) {
             playbackState.value?.let { playbackState ->
                 when {
