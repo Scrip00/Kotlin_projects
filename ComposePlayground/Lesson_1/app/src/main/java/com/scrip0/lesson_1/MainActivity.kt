@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +32,9 @@ class MainActivity : ComponentActivity() {
 					.border(10.dp, Color.Red)
 					.padding(10.dp) // Paddings applied sequentially
 			) {
+				Card() {
+					
+				}
 				Text(
 					"Hello",
 					modifier = Modifier.clickable {
